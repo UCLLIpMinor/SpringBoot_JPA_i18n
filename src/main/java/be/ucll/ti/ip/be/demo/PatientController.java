@@ -68,12 +68,4 @@ public class PatientController {
         return "redirect:/overview";
     }
 
-
-    /*
-    @GetMapping("/overviewadults")
-    public String showPatientOverviewAdults(Model model) {
-        model.addAttribute("patients", patientService.getAllAdults());
-        return "overview-patient";
-    }
-*/
 }
