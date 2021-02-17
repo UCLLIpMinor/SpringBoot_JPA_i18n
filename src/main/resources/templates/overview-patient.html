@@ -24,7 +24,7 @@
             </tr>
             </tbody>
         </table>
-        <h2 th:case="*">Patients Sorted</h2>
+        <h2>Patients sorted by name</h2>
         <table class="table table-striped table-responsive-lg">
             <thead>
             <tr>
@@ -35,6 +35,23 @@
             </thead>
             <tbody>
             <tr th:each="patient : ${sortedpatients}">
+                <td th:text="${patient.name}"></td>
+                <td th:text="${patient.email}"></td>
+                <td><a th:href="@{/update/{id}(id=${patient.id})}" class="btn btn-primary">Update</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <h2>Patients > 18</h2>
+        <table class="table table-striped table-responsive-lg">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Update</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patient : ${adultpatients}">
                 <td th:text="${patient.name}"></td>
                 <td th:text="${patient.email}"></td>
                 <td><a th:href="@{/update/{id}(id=${patient.id})}" class="btn btn-primary">Update</a></td>

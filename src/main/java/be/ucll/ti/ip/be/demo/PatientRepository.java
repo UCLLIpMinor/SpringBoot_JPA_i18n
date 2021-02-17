@@ -12,8 +12,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     Patient findPatientByEmail(String email);
 
-    /*
     @Query("SELECT p FROM Patient p WHERE p.age>18")
     List<Patient> findAllAdults ();
-*/
+
  }

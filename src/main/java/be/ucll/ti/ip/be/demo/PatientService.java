@@ -23,13 +23,12 @@ public class PatientService {
     public Iterable<Patient> getAll() {
         return patientRepository.findAll();
     }
-/*
+
     public Iterable<Patient> getAllAdults() {
         return patientRepository.findAllAdults();
     }
-*/
 
-    List<Patient> allPatientsSortedByName () {
+    List<Patient> getAllSortedByName() {
         return patientRepository.findAll(Sort.by("name"));
     }
 

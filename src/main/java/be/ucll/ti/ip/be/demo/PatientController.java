@@ -18,12 +18,9 @@ public class PatientController {
 
     @GetMapping("/overview")
     public String showPatientOverview(Model model) {
-        /*Patient elke = new Patient();
-        elke.setName("Steegmans");
-        elke.setEmail("elke.steegmans@ucll.be");
-        patientService.add(elke);*/
         model.addAttribute("patients", patientService.getAll());
-        model.addAttribute("sortedpatients", patientService.allPatientsSortedByName());
+        model.addAttribute("sortedpatients", patientService.getAllSortedByName());
+        model.addAttribute("adultpatients", patientService.getAllAdults());
         return "overview-patient";
     }
 
