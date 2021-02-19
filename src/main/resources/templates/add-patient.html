@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="#{lang}">
 <head th:replace="fragments/head::head (title='patient.add')">
 </head>
 <body>
@@ -11,7 +11,7 @@
                     <p class="mb-3">
                         <label th:for="name" class="col-form-label">Name</label>
                         <input type="text" th:field="*{name}" placeholder="Name" class="form-control col-sm-5">
-                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                        <span th:each="err:${#fields.errors('name')}" th:text="#{${err}}" class="text-danger"></span>
                     </p>
                     <p class="mb-3">
                         <label th:for="age" class="col-form-label">Age</label>

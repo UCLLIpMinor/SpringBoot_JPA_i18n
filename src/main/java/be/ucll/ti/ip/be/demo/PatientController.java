@@ -25,7 +25,7 @@ public class PatientController {
     }
 
     @GetMapping("/add")
-    public String addForm(Patient patient){
+    public String addForm(Patient patient) {
         return "add-patient";
     }
 
@@ -36,8 +36,7 @@ public class PatientController {
         }
         try {
             patientService.add(patient);
-        }
-        catch(ServiceException exc) {
+        } catch (ServiceException exc) {
             model.addAttribute("emailError", exc.getMessage());
             return "add-patient";
         }
@@ -46,12 +45,11 @@ public class PatientController {
 
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
-        try{
+        try {
             Patient patient = patientService.findUserById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid user Id: " + id));
             model.addAttribute("patient", patient);
-        }
-        catch (IllegalArgumentException exc) {
+        } catch (IllegalArgumentException exc) {
             model.addAttribute("error", exc.getMessage());
         }
         return "update-patient";
@@ -64,7 +62,16 @@ public class PatientController {
             patient.setId(id);
             return "update-patient";
         }
-        patientService.update(patient);
+        try {
+            System.out.println("update");
+            patientService.update(patient);
+            System.out.println("update is succes");
+        } catch (ServiceException e) {
+            System.out.println("in catch");
+            model.addAttribute("emailError", e.getMessage());
+            patient.setId(id);
+            return "update-patient";
+        }
         return "redirect:/overview";
     }
 

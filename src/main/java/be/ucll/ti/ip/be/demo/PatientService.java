@@ -14,7 +14,7 @@ public class PatientService {
     private PatientRepository patientRepository;
 
     public Patient add(Patient patient) throws ServiceException {
-        if (patientRepository.findPatientByEmail(patient.getEmail())!=null) {
+        if (patientRepository.findPatientByEmail(patient.getEmail()) != null) {
             throw new ServiceException("Email already in use");
         }
         return patientRepository.save(patient);
@@ -32,7 +32,13 @@ public class PatientService {
         return patientRepository.findAll(Sort.by("name"));
     }
 
-    public Patient update(Patient patient) {
+    public Patient update(Patient patient) throws ServiceException {
+        if (patient == null)
+            throw new ServiceException("Can not update non existing patient");
+        Patient patientByEmail = patientRepository.findPatientByEmail(patient.getEmail());
+        if (patientByEmail != null && patientByEmail.getId() != patient.getId()) {
+            throw new ServiceException("Email already in use (update)");
+        }
         return patientRepository.save(patient);
     }
 
